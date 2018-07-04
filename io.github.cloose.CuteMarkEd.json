@@ -40,7 +40,13 @@
 		},
 		{
 			"name": "cutemarked",
-			"buildsystem": "simple",
+			"buildsystem": "autotools",
+			"no-autogen": true,
+			"build-options":{
+				"env":{
+					"QMAKEPATH": "QMAKEPATH:/app/lib"
+				}
+			},
 			"sources":[
 				{
 					"type":"archive",
@@ -50,13 +56,21 @@
 				{
 					"type": "file",
 					"path": "io.github.cloose.CuteMarkEd.appdata.xml"
+				},
+				{
+					"type": "shell",
+					"commands":[
+						"ln -s /app/include/QtWebKitWidgets/qwebframe.h /app/include/QtWebKitWidgets/QWebFrame.h"
+					]
+				},
+				{
+					"type": "shell",
+					"commands":[
+						"qmake INCLUDEPATH+=/app/include/QtWebKitWidgets INCLUDEPATH+=/app/include/QtWebKit QMAKE_LIBDIR+=/app/lib PREFIX=/app"
+					]
 				}
 			],
-			"build-commands": [
-				"ln -s /app/include/QtWebKitWidgets/qwebframe.h /app/include/QtWebKitWidgets/QWebFrame.h",
-				"export QMAKEPATH=QMAKEPATH:/app/lib && qmake -makefile \"INCLUDEPATH+=/app/include/QtWebKitWidgets\" \"INCLUDEPATH+=/app/include/QtWebKit\" \"QMAKE_LIBDIR+=/app/lib\" PREFIX=/app",
-				"export QMAKEPATH=QMAKEPATH:/app/lib && make",
-				"make install",
+			"post-install":[
 				"install -Dm644 io.github.cloose.CuteMarkEd.appdata.xml /app/share/appdata/io.github.cloose.CuteMarkEd.appdata.xml"
 			]
 		}
