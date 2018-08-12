@@ -1,0 +1,45 @@
+app-id: io.github.cloose.CuteMarkEd
+base: io.qt.qtwebkit.BaseApp
+base-version: stable
+runtime: org.kde.Platform
+runtime-version: '5.9'
+sdk: org.kde.Sdk
+command: cutemarked
+rename-icon: cutemarked
+rename-desktop-file: cutemarked.desktop
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --share=network
+  - --device=dri
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/mkspecs
+  - /lib/pkgconfig
+  - '*.la'
+  - '*.a'
+modules:
+  - name: discount
+    sources:
+      - type: archive
+        url: https://github.com/Orc/discount/archive/v2.2.4.tar.gz
+        sha256: 918905377e6ed3d0a7158cac0a4a18ed3c4cc0cad8ee95dddd82cb86ba9dd044
+      - type: shell
+        commands:
+          - mv configure.sh configure
+
+  - name: cutemarked
+    buildsystem: qmake
+    build-options:
+      env:
+        QMAKEPATH: /app/lib
+    post-install:
+      - rm -rf /app/{include,lib/cmake,lib/mkspecs,lib/pkgconfig} # io.qt.qtwebkit.BaseApp
+      - install -Dm644 -t /app/share/metainfo io.github.cloose.CuteMarkEd.appdata.xml
+    sources:
+      - type: file
+        path: io.github.cloose.CuteMarkEd.appdata.xml
+      - type: archive
+        url: https://github.com/cloose/CuteMarkEd/archive/v0.11.3.tar.gz
+        sha256: 78a41808c2f0452375810abdff76eeaaee012f8d1368a2b8772ec6b4d2ceeec8
