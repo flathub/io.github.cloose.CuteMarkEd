@@ -9,8 +9,9 @@
 	"rename-icon": "cutemarked",
 	"rename-desktop-file": "cutemarked.desktop",
 	"finish-args":[
-		"--socket=x11",
 		"--socket=wayland",
+		"--socket=x11",
+		"--share=ipc",
 		"--share=network",
 		"--device=dri"
 	],
