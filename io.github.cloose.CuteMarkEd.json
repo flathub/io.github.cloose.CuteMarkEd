@@ -25,7 +25,6 @@
 	"modules":[
 		{
 			"name": "discount",
-			"no-autogen": true,
 			"sources":[
 				{
 					"type":"archive",
@@ -34,7 +33,7 @@
 				},
 				{
 					"type": "shell",
-					"commands": ["./configure.sh --prefix=/app"]
+					"commands": ["mv configure.sh configure"]
 				}
 			]
 		},
@@ -43,15 +42,9 @@
 			"buildsystem": "qmake",
 			"build-options":{
 				"env":{
-					"QMAKEPATH": "QMAKEPATH:/app/lib"
+					"QMAKEPATH": "/app/lib"
 				}
 			},
-			"config-opts":[
-				"INCLUDEPATH+=/app/include/QtWebKitWidgets",
-				"INCLUDEPATH+=/app/include/QtWebKit",
-				"QMAKE_LIBDIR+=/app/lib",
-				"PREFIX=/app"
-			],
 			"sources":[
 				{
 					"type":"archive",
@@ -61,12 +54,6 @@
 				{
 					"type": "file",
 					"path": "io.github.cloose.CuteMarkEd.appdata.xml"
-				},
-				{
-					"type": "shell",
-					"commands":[
-						"ln -s /app/include/QtWebKitWidgets/qwebframe.h /app/include/QtWebKitWidgets/QWebFrame.h"
-					]
 				}
 			],
 			"post-install":[
