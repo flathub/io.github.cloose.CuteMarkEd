@@ -1,13 +1,11 @@
 {
 	"app-id": "io.github.cloose.CuteMarkEd",
 	"base": "io.qt.qtwebkit.BaseApp",
-	"base-version": "5.9",
+	"base-version": "5.15",
 	"runtime": "org.kde.Platform",
-	"runtime-version": "5.9",
+	"runtime-version": "5.15",
 	"sdk": "org.kde.Sdk",
 	"command": "cutemarked",
-	"rename-icon": "cutemarked",
-	"rename-desktop-file": "cutemarked.desktop",
 	"finish-args":[
 		"--socket=wayland",
 		"--socket=x11",
@@ -29,23 +27,31 @@
 			"sources":[
 				{
 					"type":"archive",
-					"url": "https://github.com/Orc/discount/archive/v2.2.3a.tar.gz",
-					"sha256": "40defe460dc005dbc78a4e6174fce29fca2ac3ccd5acd400c05eb713f824df97"
+					"url": "https://github.com/cloose/discount/archive/refs/tags/v2.1.8-cutemarked.tar.gz",
+					"sha256": "30ac50e6e432e36113a8365132f56eafbf3795b412b7299303f86b624aea9479"
 				},
 				{
 					"type": "shell",
-					"commands": ["mv configure.sh configure"]
+					"commands": [
+					    "mv configure.sh configure"
+					]
 				}
 			]
 		},
 		{
 			"name": "cutemarked",
 			"buildsystem": "qmake",
+            "make-install-args": [
+                "INSTALL_ROOT=/app"
+            ],
 			"build-options":{
 				"env":{
 					"QMAKEPATH": "/app/lib"
 				}
 			},
+			"config-opts": [
+                "QMAKE_LIBDIR=/app/lib"
+            ],
 			"sources":[
 				{
 					"type":"archive",
@@ -53,12 +59,17 @@
 					"sha256": "78a41808c2f0452375810abdff76eeaaee012f8d1368a2b8772ec6b4d2ceeec8"
 				},
 				{
+                    "type": "patch",
+                    "path": "0001-Fix-build-issues-with-recents-Qt-versions.patch"
+				},
+				{
 					"type": "file",
 					"path": "io.github.cloose.CuteMarkEd.appdata.xml"
 				}
 			],
 			"post-install":[
-				"install -Dm644 io.github.cloose.CuteMarkEd.appdata.xml /app/share/appdata/io.github.cloose.CuteMarkEd.appdata.xml"
+				"install -Dm644 io.github.cloose.CuteMarkEd.appdata.xml /share/appdata/io.github.cloose.CuteMarkEd.appdata.xml",
+				"mv /app/app/bin/* /app/bin"
 			]
 		}
 	]
