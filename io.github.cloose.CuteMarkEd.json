@@ -61,15 +61,23 @@
 				{
                     "type": "patch",
                     "path": "0001-Fix-build-issues-with-recents-Qt-versions.patch"
-				},
+				}
+			],
+			"post-install":[
+				"mv /app/app/bin/* /app/bin"
+			]
+		},
+		{
+			"name": "cutemarked-appdata",
+			"buildsystem": "simple",
+			"build-commands":[
+				"install -Dm644 io.github.cloose.CuteMarkEd.appdata.xml /app/share/metainfo/io.github.cloose.CuteMarkEd.appdata.xml"
+			],
+			"sources":[
 				{
 					"type": "file",
 					"path": "io.github.cloose.CuteMarkEd.appdata.xml"
 				}
-			],
-			"post-install":[
-				"install -Dm644 io.github.cloose.CuteMarkEd.appdata.xml /share/appdata/io.github.cloose.CuteMarkEd.appdata.xml",
-				"mv /app/app/bin/* /app/bin"
 			]
 		}
 	]
