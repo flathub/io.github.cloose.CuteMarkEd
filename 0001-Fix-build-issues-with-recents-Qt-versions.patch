@@ -1,0 +1,24 @@
+From 98ed9e0b0a7218f625b7e3f2d12afbee52652769 Mon Sep 17 00:00:00 2001
+From: Filipe Azevedo <pasnox@gmail.com>
+Date: Sat, 8 Sep 2018 17:12:21 +0200
+Subject: [PATCH] Fix build issues with recents Qt versions
+
+---
+ app/optionsdialog.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/app/optionsdialog.cpp b/app/optionsdialog.cpp
+index 21508aa..1c775a7 100644
+--- a/app/optionsdialog.cpp
++++ b/app/optionsdialog.cpp
+@@ -24,6 +24,7 @@
+ #include <QMessageBox>
+ #include <QStyledItemDelegate>
+ #include <QTableWidgetItem>
++#include <QAction>
+ 
+ #include <snippets/snippetcollection.h>
+ #include "options.h"
+-- 
+2.31.1
+
