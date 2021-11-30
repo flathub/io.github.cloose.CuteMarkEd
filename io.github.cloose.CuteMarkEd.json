@@ -1,9 +1,9 @@
 {
 	"app-id": "io.github.cloose.CuteMarkEd",
 	"base": "io.qt.qtwebkit.BaseApp",
-	"base-version": "5.15",
+	"base-version": "5.15-21.08",
 	"runtime": "org.kde.Platform",
-	"runtime-version": "5.15",
+	"runtime-version": "5.15-21.08",
 	"sdk": "org.kde.Sdk",
 	"command": "cutemarked",
 	"finish-args":[
