@@ -1,4 +1,5 @@
 {
     "end-of-life": "This application is no longer maintained because it hasn't received updates since 2016",
-    "skip-icon-checks": true
+    "skip-icon-checks": true,
+    "skip-appstream": true
 }
